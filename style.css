@@ -35,13 +35,139 @@ header {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding: 0 32px;
+    padding: 0 24px;
     height: 70px;
-    gap: 24px;
+    gap: 20px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
+}
+
+.hamburger {
+    background: none;
+    border: none;
+    color: var(--wit);
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.hamburger:hover {
+    background-color: var(--lichtblauw);
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--blauw);
+    z-index: 300;
+    transition: left 0.3s ease;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+}
+
+.sidenav.open {
+    left: 0;
+}
+
+.sidenav-sluit {
+    background: none;
+    border: none;
+    color: var(--wit);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 16px 20px;
+    text-align: right;
+    display: block;
+    line-height: 1;
+}
+
+.sidenav-sluit:hover {
+    color: var(--accent);
+}
+
+.sidenav-logo {
+    padding: 0 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidenav-logo img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.sidenav-clubnaam {
+    color: var(--wit);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.sidenav-clubnaam span {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.sidenav nav ul {
+    list-style: none;
+    padding: 16px 0;
+    display: block;
+}
+
+.sidenav nav ul li a {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    border-left: 4px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sidenav nav ul li a:hover {
+    background-color: var(--lichtblauw);
+    border-left-color: var(--accent);
+    color: var(--wit);
+}
+
+.sidenav nav ul li a.actief {
+    background-color: rgba(255,255,255,0.1);
+    border-left-color: var(--accent);
+    color: var(--accent);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 250;
+}
+
+.overlay.open {
+    display: block;
 }
 
 .logo-wrapper {
@@ -1069,4 +1195,113 @@ footer {
     border-left: 4px solid var(--accent);
     margin-top: 16px;
     margin-bottom: 8px;
+}
+
+/* ===== CLUB LOGOS IN WEDSTRIJDKAART ===== */
+.wedstrijd-teams .team {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.wedstrijd-teams .team.uit {
+    grid-template-columns: 1fr auto;
+    text-align: right;
+}
+
+.wedstrijd-teams .team img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* ===== SPELER KAART MET FOTO/AVATAR ===== */
+.selectie-sectie {
+    padding: 0 48px;
+    margin-bottom: 8px;
+}
+
+.selectie-sectie:first-of-type {
+    padding-top: 36px;
+}
+
+.selectie-sectie:last-of-type {
+    padding-bottom: 48px;
+}
+
+.selectie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.speler-kaart-foto {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 180px 36px 1fr;
+    align-items: center;
+    gap: 16px;
+    transition: box-shadow 0.15s, transform 0.15s;
+    border-left: 4px solid var(--blauw);
+}
+
+.speler-kaart-foto:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.12);
+    transform: translateY(-2px);
+}
+
+.speler-foto {
+    width: 180px;
+    height: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center 15%;
+    border: 3px solid var(--blauw);
+    flex-shrink: 0;
+}
+
+.speler-rugnr {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-align: center;
+    opacity: 0.6;
+}
+
+.speler-naam-groot {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tekst);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.captain-badge {
+    background-color: var(--accent);
+    color: var(--zwart);
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+}
+
+.speler-meta {
+    font-size: 0.75rem;
+    color: var(--donkergrijs);
+    margin-top: 3px;
+}
+
+.speler-pos {
+    color: var(--lichtblauw);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }

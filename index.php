@@ -15,9 +15,10 @@ $programma = $database->selectRows("SELECT datum, thuisclub, uitclub FROM progra
     </head>
     <body>
         <header>
+            <button class="hamburger" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
             <a href="index.php" class="logo-wrapper">
                 <img src="img/logo.png" alt="Telstar logo" class="logo-img">
-                <div class="clubnaam">Telstar<small>IJmuiden · 1963</small></div>
+                <div class="clubnaam">Telstar<small>IJmuiden &middot; 1963</small></div>
             </a>
             <div class="zoekbalk">
                 <form action="resultaten.php" method="get">
@@ -25,17 +26,32 @@ $programma = $database->selectRows("SELECT datum, thuisclub, uitclub FROM progra
                     <button type="submit">&#128269;</button>
                 </form>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="index.php" class="actief">Home</a></li>
-                    <li><a href="mannen.php">Mannen</a></li>
-                    <li><a href="resultaten.php">Resultaten</a></li>
-                    <li><a href="webshop.php">Webshop</a></li>
-                    <li><a href="declub.php">De Club</a></li>
-                </ul>
-            </nav>
         </header>
 
+        <div class="sidenav" id="sidenav">
+            <button class="sidenav-sluit" onclick="toggleNav()" aria-label="Sluiten">&times;</button>
+            <div class="sidenav-logo">
+                <img src="img/logo.png" alt="Telstar logo">
+                <div class="sidenav-clubnaam">Telstar<span>IJmuiden &middot; 1963</span></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.php">&#127968; Home</a></li>
+                    <li><a href="mannen.php">&#128085; Mannen</a></li>
+                    <li><a href="resultaten.php">&#9917; Resultaten</a></li>
+                    <li><a href="webshop.php">&#128722; Webshop</a></li>
+                    <li><a href="declub.php">&#127942; De Club</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="overlay" id="overlay" onclick="toggleNav()"></div>
+
+        <script>
+        function toggleNav() {
+            document.getElementById('sidenav').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        }
+        </script>
         <main>
             <section class="hero">
                 <div class="hero-welkom">

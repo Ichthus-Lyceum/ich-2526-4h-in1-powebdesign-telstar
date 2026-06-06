@@ -20,7 +20,7 @@ JOIN clubs thuis ON thuis.clubid = w.thuisclub
 JOIN clubs uit   ON uit.clubid = w.uitclub
 WHERE w.thuisclub = :clubid
    OR w.uitclub = :clubid
-ORDER BY w.yyyy ASC, w.mm DESC, w.dd DESC
+ORDER BY w.yyyy DESC, w.mm DESC, w.dd DESC
 LIMIT 10
 ";
 
