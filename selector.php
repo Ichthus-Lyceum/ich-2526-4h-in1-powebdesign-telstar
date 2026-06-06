@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-<title>Paginatemplate</title>
-<meta charset="utf-8">
-<meta name="author" content="Quinten">
-<meta name="keywords" content="template,HTML,metatags">
-<meta name="description" content="Dit is de HTML5 template voor iedere pagina">
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout</title>
 
-<header>
-    <img>  
-    <h1> Telstar </h1>
-    <address> 
-    </address>
-</header>
-<nav> 
-    <a href=" " id= "super">link</h1>
-    <a href=" " class= "belangerijk">linkje</a>
-    <a href=" ">grote link</a>
-</nav>
-<main> 
-    <p> Standen </p>
-    <p> Ons team</p>
-    <p> Tickets </p>
-</main>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+            <img src="sc-telstar-logo.png" alt="Home">
+        </a>
+
+        <div class="search">
+            <input type="text" placeholder="zoeken">
+        </div>
+
+        <div class="profile">
+            👤
+        </div>
+
+    </header>
+
+    <aside class="sidebar">
+        Menu
+    </aside>
+
+    <main class="content">
+
+        <h1 class="title">Webshop</h1>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>Tickets</h2>
+                <p>VIP Box</p>
+                <p>wedstrijden</p>
+
+            </div>
+
+            <div class="card">
+                <h2>Kleding</h2>
+                <p>Shirts</p>
+                <p>Broeken</p>
+                <p>sokken</p>
+                <p>Jassen</p>
+            </div>
+
+        </div>
+
+    </main>
+
 </body>
 </html>
-<div class="search">
-        <input type="text" placeholder="zoeken">
-    </div>
