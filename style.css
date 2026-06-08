@@ -539,7 +539,7 @@ main {
 
 .item-kaart {
     background-color: var(--wit);
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid var(--rand);
     overflow: hidden;
     transition: box-shadow 0.2s;
@@ -550,13 +550,14 @@ main {
 }
 
 .item-afbeelding {
-    background-color: var(--grijs);
-    height: 100px;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    font-size: 2rem;
-    color: var(--blauw);
+    .product-afbeelding {
+    background: #f8f9fc;
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+    border-bottom: 1px solid var(--rand);
+    overflow: hidden;
+}
 }
 
 .item-info {
@@ -585,12 +586,7 @@ main {
 }
 
 /* ===== SELECTIE / MANNEN ===== */
-.selectie-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 36px 40px;
-}
+
 
 .speler-rij {
     background-color: var(--wit);
@@ -910,13 +906,12 @@ footer {
 }
 
 .product-afbeelding {
-    background: linear-gradient(135deg, var(--grijs), #e0e4f0);
-    height: 140px;
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    font-size: 3.5rem;
+    background: #f8f9fc;
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
     border-bottom: 1px solid var(--rand);
+    overflow: hidden;
 }
 
 .product-info {
@@ -1023,10 +1018,16 @@ footer {
 
 /* ===== PRODUCT AFBEELDING MET ECHTE IMG ===== */
 .product-afbeelding img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center center;
     display: block;
+    padding: 12px;
+    background: #f8f9fc;
 }
 
 /* ===== RESULTATEN ===== */
@@ -1178,11 +1179,7 @@ footer {
 .wedstrijd-badge.verlies { background-color: #EF5350; }
 
 /* ===== SELECTIE SECTIE ===== */
-.selectie-sectie {
-    padding: 36px 48px;
-    display: grid;
-    gap: 8px;
-}
+
 
 .positie-titel {
     font-size: 0.8rem;
@@ -1905,4 +1902,454 @@ button.knop:hover {
     font-weight: 900;
     color: var(--blauw);
     font-size: 0.8rem;
+}
+/* ===== HERO VERBETERINGEN ===== */
+.hero-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    display: block;
+}
+
+.hero-knoppen {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: start;
+}
+
+.knop-outline {
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.6);
+    color: var(--wit);
+}
+
+.knop-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: var(--wit);
+}
+
+.knop-goud {
+    background-color: var(--accent);
+    color: var(--zwart);
+}
+
+.knop-goud:hover {
+    background-color: #d4a200;
+}
+
+.hero-info-widget {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.hero-info-widget h3 {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+
+.hero-feiten {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.hero-feiten li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.82rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 6px;
+}
+
+.feit-label {
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+}
+
+.feit-waarde {
+    color: var(--wit);
+    font-weight: 700;
+    text-align: right;
+}
+
+/* stats balk */
+.stats-balk {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: var(--zwart);
+    border-bottom: 3px solid var(--accent);
+}
+
+.stat {
+    padding: 20px;
+    text-align: center;
+    display: grid;
+    gap: 4px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-nummer {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--wit);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+}
+
+
+/* ===== AFREKENEN PAGINA ===== */
+/* ===== CHECKOUT PAGINA ===== */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 28px;
+    padding: 36px 48px;
+    align-items: start;
+}
+
+.checkout-formulier {
+    display: grid;
+    gap: 20px;
+}
+
+.checkout-blok {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 24px;
+    border-top: 4px solid var(--blauw);
+}
+
+.checkout-blok h2 {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rand);
+}
+
+.form-veld {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-veld:last-child { margin-bottom: 0; }
+
+.form-veld label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--donkergrijs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-veld input,
+.form-veld select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--rand);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--tekst);
+    background: var(--wit);
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-veld input:focus,
+.form-veld select:focus {
+    border-color: var(--blauw);
+}
+
+.form-rij-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* betaalopties */
+.betaal-opties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.betaal-optie {
+    cursor: pointer;
+}
+
+.betaal-optie input[type="radio"] {
+    display: none;
+}
+
+.betaal-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 2px solid var(--rand);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--tekst);
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.betaal-optie input[type="radio"]:checked + .betaal-label {
+    border-color: var(--blauw);
+    background-color: rgba(0,43,127,0.05);
+    color: var(--blauw);
+}
+
+.betaal-icoon {
+    font-size: 1.3rem;
+}
+
+/* overzicht */
+.checkout-overzicht {
+    display: grid;
+    gap: 20px;
+    position: sticky;
+    top: 90px;
+}
+
+.co-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rand);
+}
+
+.co-item:last-child { border-bottom: none; }
+
+.co-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid var(--rand);
+    background: #f8f9fc;
+    padding: 4px;
+}
+
+.co-item-info {
+    display: grid;
+    gap: 3px;
+}
+
+.co-item-naam {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.co-item-meta {
+    font-size: 0.75rem;
+    color: var(--donkergrijs);
+}
+
+.co-item-totaal {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: var(--blauw);
+    white-space: nowrap;
+}
+
+/* korting */
+.korting-blok {
+    border-top-color: var(--accent);
+}
+
+.korting-invoer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.korting-invoer input {
+    padding: 10px 14px;
+    border: 1.5px solid var(--rand);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.korting-invoer input:focus {
+    border-color: var(--accent);
+}
+
+.korting-melding {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.korting-melding.geldig {
+    background-color: rgba(76,175,80,0.1);
+    color: #2e7d32;
+    border: 1px solid #4CAF50;
+}
+
+.korting-melding.ongeldig {
+    background-color: rgba(239,83,80,0.1);
+    color: #c62828;
+    border: 1px solid #EF5350;
+}
+
+/* totaal blok */
+.checkout-totaal-blok {
+    border-top-color: var(--accent);
+}
+
+.co-totaal-rij {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rand);
+    color: var(--donkergrijs);
+}
+
+.co-totaal-rij.korting-rij {
+    color: #2e7d32;
+}
+
+.korting-bedrag {
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.co-totaal-rij.totaal-finaal {
+    border-bottom: none;
+    padding-top: 12px;
+    font-size: 1.05rem;
+    color: var(--tekst);
+}
+
+.checkout-knop {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.95rem;
+    margin-top: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: var(--blauw);
+    color: var(--wit);
+    border: none;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+.checkout-knop:hover { background-color: var(--lichtblauw); }
+
+.checkout-terug {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--donkergrijs);
+    text-decoration: none;
+}
+
+.checkout-terug:hover { color: var(--blauw); text-decoration: underline; }
+
+/* bevestiging popup */
+.bevestiging-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bevestiging-popup {
+    background: var(--wit);
+    border-radius: 12px;
+    padding: 48px 40px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.bevestiging-icoon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+}
+
+.bevestiging-popup h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--blauw);
+    margin-bottom: 12px;
+}
+
+.bevestiging-popup p {
+    font-size: 0.9rem;
+    color: var(--donkergrijs);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.bevestiging-sub {
+    font-size: 0.85rem;
+    color: var(--blauw);
+}
+/* ===== HULPKLASSEN (vervangt inline styles) ===== */
+.verborgen {
+    display: none;
+}
+
+.knop-blok {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.knop-midden {
+    text-align: center;
+    display: block;
+}
+
+.knop-popup {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.ww-footer-verborgen {
+    display: none;
 }
