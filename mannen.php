@@ -10,13 +10,13 @@
     </head>
     <body>
         <header>
-            <button class="hamburger" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
+            <button class="menu-knop" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
             <a href="index.php" class="logo-wrapper">
                 <img src="img/logo.png" alt="Telstar logo" class="logo-img">
                 <div class="clubnaam">Telstar<small>IJmuiden &middot; 1963</small></div>
             </a>
             <div class="zoekbalk">
-                <form action="resultaten.php" method="get">
+                <form action="zoeken.php" method="get">
                     <input type="text" name="q" placeholder="Zoeken...">
                     <button type="submit">&#128269;</button>
                 </form>
