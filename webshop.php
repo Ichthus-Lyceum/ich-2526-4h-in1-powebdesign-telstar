@@ -10,26 +10,98 @@
     </head>
     <body>
         <header>
+            <button class="menu-knop" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
             <a href="index.php" class="logo-wrapper">
-                <img src="img/logo.png" alt="Telstar logo" class="logo-img">
-                <div class="clubnaam">Telstar<small>IJmuiden · 1963</small></div>
+                <img src="https://images.seeklogo.com/logo-png/29/2/sc-telstar-logo-png_seeklogo-294997.png" alt="Telstar logo" class="logo-img">
+                <div class="clubnaam">Telstar<small>IJmuiden &middot; 1963</small></div>
             </a>
-            <div class="zoekbalk">
-                <form action="resultaten.php" method="get">
-                    <input type="text" name="q" placeholder="Zoeken...">
-                    <button type="submit">&#128269;</button>
-                </form>
+            <div class="header-rechts">
+                <div class="zoekbalk">
+                    <form action="zoeken.php" method="get">
+                        <input type="text" name="q" placeholder="Zoeken...">
+                        <button type="submit">&#128269;</button>
+                    </form>
+                </div>
+                <button class="winkelwagen-knop" onclick="toggleWinkelwagen()" aria-label="Winkelwagen">
+                    &#128722;
+                    <span class="ww-aantal" id="ww-aantal">0</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="sidenav" id="sidenav">
+            <button class="sidenav-sluit" onclick="toggleNav()" aria-label="Sluiten">&times;</button>
+            <div class="sidenav-logo">
+                <img src="https://images.seeklogo.com/logo-png/29/2/sc-telstar-logo-png_seeklogo-294997.png" alt="Telstar logo">
+                <div class="sidenav-clubnaam">Telstar<span>IJmuiden &middot; 1963</span></div>
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="mannen.php">Mannen</a></li>
-                    <li><a href="resultaten.php">Resultaten</a></li>
-                    <li><a href="webshop.php" class="actief">Webshop</a></li>
-                    <li><a href="declub.php">De Club</a></li>
+                    <li><a href="index.php">&#127968; Home</a></li>
+                    <li><a href="mannen.php">&#128085; Mannen</a></li>
+                    <li><a href="resultaten.php">&#9917; Resultaten</a></li>
+                    <li><a href="webshop.php" class="actief">&#128722; Webshop</a></li>
+                    <li><a href="declub.php">&#127942; De Club</a></li>
                 </ul>
             </nav>
-        </header>
+        </div>
+        <div class="overlay" id="overlay" onclick="toggleNav()"></div>
+
+        <div class="ww-panel" id="ww-panel">
+            <div class="ww-header">
+                <h3>&#128722; Winkelwagen</h3>
+                <button onclick="toggleWinkelwagen()">&times;</button>
+            </div>
+            <div class="ww-items" id="ww-items">
+                <p class="ww-leeg">Je winkelwagen is leeg.</p>
+            </div>
+            <div class="ww-footer ww-footer-verborgen" id="ww-footer">
+                <div class="ww-totaal">Totaal: <strong id="ww-totaal">&euro;0,00</strong></div>
+                <a href="afrekenen.php" class="knop" onclick="slaWinkelwarenOp()">Afrekenen</a>
+            </div>
+        </div>
+        <div class="overlay" id="ww-overlay" onclick="toggleWinkelwagen()"></div>
+
+        <script>
+        function toggleNav() {
+            document.getElementById('sidenav').classList.toggle('open');
+            document.getElementById('overlay').classList.toggle('open');
+        }
+        var winkelwagen = [];
+        function toggleWinkelwagen() {
+            document.getElementById('ww-panel').classList.toggle('open');
+            document.getElementById('ww-overlay').classList.toggle('open');
+        }
+        function voegToe(naam, prijs, img) {
+            var bestaand = winkelwagen.find(function(i){ return i.naam === naam; });
+            if(bestaand) { bestaand.aantal++; } else { winkelwagen.push({ naam: naam, prijs: prijs, img: img, aantal: 1 }); }
+            updateWinkelwagen();
+            toggleWinkelwagen();
+        }
+        function verwijder(naam) {
+            winkelwagen = winkelwagen.filter(function(i){ return i.naam !== naam; });
+            updateWinkelwagen();
+        }
+        function updateWinkelwagen() {
+            var totaal = 0;
+            var html = '';
+            winkelwagen.forEach(function(item) {
+                totaal += item.prijs * item.aantal;
+                html += '<div class="ww-item">' +
+                    (item.img ? '<img src="' + item.img + '" alt="' + item.naam + '">' : '<div class="ww-item-placeholder">&#128722;</div>') +
+                    '<div class="ww-item-info"><span class="ww-item-naam">' + item.naam + '</span><span class="ww-item-prijs">&euro;' + item.prijs.toFixed(2).replace('.',',') + ' &times; ' + item.aantal + '</span></div>' +
+                    '<button class="ww-verwijder" onclick="verwijder(\'' + item.naam.replace(/'/g,"\\'") + '\')">&times;</button></div>';
+            });
+            document.getElementById('ww-items').innerHTML = html || '<p class="ww-leeg">Je winkelwagen is leeg.</p>';
+            document.getElementById('ww-aantal').textContent = winkelwagen.reduce(function(s,i){ return s+i.aantal; }, 0);
+            document.getElementById('ww-totaal').innerHTML = '&euro;' + totaal.toFixed(2).replace('.',',');
+            var footer = document.getElementById('ww-footer');
+            if(winkelwagen.length) { footer.classList.remove('ww-footer-verborgen'); } else { footer.classList.add('ww-footer-verborgen'); }
+        }
+        function slaWinkelwarenOp() {
+            try { sessionStorage.setItem('telstar_winkelwagen', JSON.stringify(winkelwagen)); } catch(e) {}
+        }
+        </script>
 
         <main>
             <section class="shop-hero">
@@ -37,201 +109,73 @@
                     <p class="shop-hero-sub">Officiële fanshop van</p>
                     <h1>TELSTAR</h1>
                     <p class="shop-hero-aanbieding">&#127381; 50% korting op alle wedstrijdkleding! Gebruik code: <strong>TELSTAR50</strong></p>
-                    <a href="#wedstrijd" class="knop">Shop nu</a>
+                    <a href="#producten" class="knop">Shop nu</a>
                 </div>
             </section>
 
             <section class="shop-categorieen">
-                <a href="#wedstrijd" class="categorie-kaart">
-                    <div class="categorie-icoon">&#128085;</div>
-                    <h3>Wedstrijd</h3>
-                    <p>Officiële shirts & tenues</p>
-                </a>
-                <a href="#training" class="categorie-kaart">
-                    <div class="categorie-icoon">&#127943;</div>
-                    <h3>Training</h3>
-                    <p>Trainingskleding & sportswear</p>
-                </a>
-                <a href="#fanitems" class="categorie-kaart">
-                    <div class="categorie-icoon">&#127881;</div>
-                    <h3>Fan items</h3>
-                    <p>Sjaals, vlaggen & meer</p>
-                </a>
-                <a href="#tickets" class="categorie-kaart">
-                    <div class="categorie-icoon">&#127915;</div>
-                    <h3>Tickets</h3>
-                    <p>Thuiswedstrijden Telstar</p>
-                </a>
+                <a href="#thuistenue" class="categorie-kaart"><div class="categorie-icoon">&#128085;</div><h3>Thuistenue</h3><p>Officiële thuiskleding</p></a>
+                <a href="#uittenue" class="categorie-kaart"><div class="categorie-icoon">&#128084;</div><h3>Uittenue</h3><p>Officiële uitkleding</p></a>
+                <a href="#derdetenue" class="categorie-kaart"><div class="categorie-icoon">&#127943;</div><h3>Derde tenue</h3><p>Officiële derde kleding</p></a>
+                <a href="#fanitems" class="categorie-kaart"><div class="categorie-icoon">&#127881;</div><h3>Fan items</h3><p>Sjaals, vlaggen & meer</p></a>
             </section>
 
-            <section class="producten-sectie">
+            <?php
+            $shop = [
+                'Thuistenue' => [
+                    ['naam'=>'Telstar Thuisshirt 25/26',   'prijs'=>69.95, 'foto'=>'img/thuisshirt.jpeg',  'badge'=>'Nieuw'],
+                    ['naam'=>'Telstar Thuisbroek 25/26',   'prijs'=>39.95, 'foto'=>'img/thuisbroek.jpeg'],
+                    ['naam'=>'Telstar Thuissokken 25/26',  'prijs'=>14.95, 'foto'=>'img/sokkenthuis.jpeg'],
+                ],
+                'Uittenue' => [
+                    ['naam'=>'Telstar Uitshirt 25/26',     'prijs'=>69.95, 'foto'=>'img/uitshirt.jpeg'],
+                    ['naam'=>'Telstar Uitbroek 25/26',     'prijs'=>39.95, 'foto'=>'img/uitbroekje.jpeg'],
+                    ['naam'=>'Telstar Uitsokken 25/26',    'prijs'=>14.95, 'foto'=>'img/uitsokken.jpeg'],
+                ],
+                'Derde tenue' => [
+                    ['naam'=>'Telstar Derde Shirt 25/26',  'prijs'=>69.95, 'foto'=>'img/derdeshirt.jpeg'],
+                    ['naam'=>'Telstar Derde Broek 25/26',  'prijs'=>39.95, 'foto'=>'img/derdebroekje.jpeg'],
+                    ['naam'=>'Telstar Derde Sokken 25/26', 'prijs'=>14.95, 'foto'=>'img/derdesokken.jpeg'],
+                ],
+                'Fan items' => [
+                    ['naam'=>'Telstar Retro Sjaal',  'prijs'=>14.95, 'foto'=>'https://telstar.robey-clubs.com/cdn/shop/files/TEL50027-100_Product_01_telstar-retro-sjaal.jpg?v=1780814094&width=5000'],
+                    ['naam'=>'Telstar Vlag (groot)', 'prijs'=>19.95, 'foto'=>'https://telstar.robey-clubs.com/cdn/shop/files/TEL50025-100_Product_01_telstar-vlag-telstar.jpg?v=1780814093&width=5000'],
+                    ['naam'=>'Telstar Vlag (klein)', 'prijs'=>19.95, 'foto'=>'https://telstar.robey-clubs.com/cdn/shop/files/TEL50026-100_Product_01_telstar-vlag-logo.jpg?v=1780814094&width=5000'],
+                    ['naam'=>'Telstar Sluban Bus',   'prijs'=>34.95, 'foto'=>'https://telstar.robey-clubs.com/cdn/shop/files/TEL50024-900_Product_01_telstar-bus.jpg?v=1780814093&width=5000'],
+                ],
+            ];
 
-                <h2 class="sectie-titel" id="wedstrijd">Wedstrijd — Thuistenue</h2>
-                <div class="producten-grid">
-                    <article class="product-kaart">
-                        <div class="product-badge">Nieuw</div>
-                        <div class="product-afbeelding">
-                            <img src="img/thuisshirt.jpeg" alt="Telstar Thuisshirt 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Thuisshirt 25/26</h4>
-                            <div class="product-prijs">&euro;69,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/thuisbroek.jpeg" alt="Telstar Thuisbroek 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Thuisbroek 25/26</h4>
-                            <div class="product-prijs">&euro;39,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/sokkenthuis.jpeg" alt="Telstar Thuissokken 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Thuissokken 25/26</h4>
-                            <div class="product-prijs">&euro;14,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                </div>
+            $anker = ['Thuistenue'=>'thuistenue','Uittenue'=>'uittenue','Derde tenue'=>'derdetenue','Fan items'=>'fanitems'];
 
-                <h2 class="sectie-titel">Wedstrijd — Uittenue</h2>
-                <div class="producten-grid">
+            echo '<section class="producten-sectie" id="producten">';
+            foreach($shop as $categorie => $producten) {
+                echo '<h2 class="sectie-titel" id="' . $anker[$categorie] . '">' . $categorie . '</h2>';
+                echo '<div class="producten-grid">';
+                foreach($producten as $p) {
+                    $badge = isset($p['badge']) ? '<div class="product-badge">' . $p['badge'] . '</div>' : '';
+                    $uitverkocht = isset($p['uitverkocht']) && $p['uitverkocht'];
+                    $prijs_fmt = number_format($p['prijs'], 2, ',', '.');
+                    $foto = $p['foto'];
+                    echo '
                     <article class="product-kaart">
+                        ' . $badge . '
                         <div class="product-afbeelding">
-                            <img src="img/uitshirt.jpeg" alt="Telstar Uitshirt 25/26">
+                            <img src="' . $foto . '" alt="' . htmlspecialchars($p['naam']) . '">
                         </div>
                         <div class="product-info">
-                            <h4>Telstar Uitshirt 25/26</h4>
-                            <div class="product-prijs">&euro;69,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
+                            <h4>' . htmlspecialchars($p['naam']) . '</h4>
+                            <div class="product-prijs">&euro;' . $prijs_fmt . '</div>
+                            ' . ($uitverkocht
+                                ? '<button class="knop-klein" disabled>Uitverkocht</button>'
+                                : '<button class="knop-klein" onclick="voegToe(\'' . addslashes($p['naam']) . '\', ' . $p['prijs'] . ', \'' . addslashes($foto) . '\')">&#128722; In winkelwagen</button>'
+                            ) . '
                         </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/uitbroekje.jpeg" alt="Telstar Uitbroek 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Uitbroek 25/26</h4>
-                            <div class="product-prijs">&euro;39,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/uitsokken.jpeg" alt="Telstar Uitsokken 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Uitsokken 25/26</h4>
-                            <div class="product-prijs">&euro;14,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                </div>
-
-                <h2 class="sectie-titel">Wedstrijd — Derde tenue</h2>
-                <div class="producten-grid">
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/derdeshirt.jpeg" alt="Telstar Derde Shirt 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Derde Shirt 25/26</h4>
-                            <div class="product-prijs">&euro;69,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/derdebroekje.jpeg" alt="Telstar Derde Broek 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Derde Broek 25/26</h4>
-                            <div class="product-prijs">&euro;39,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">
-                            <img src="img/derdesokken.jpeg" alt="Telstar Derde Sokken 25/26">
-                        </div>
-                        <div class="product-info">
-                            <h4>Telstar Derde Sokken 25/26</h4>
-                            <div class="product-prijs">&euro;14,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                </div>
-
-                <h2 class="sectie-titel" id="fanitems">Fan items</h2>
-                <div class="producten-grid">
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">&#127881;</div>
-                        <div class="product-info">
-                            <h4>Telstar Retro Sjaal</h4>
-                            <div class="product-prijs">&euro;14,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-badge uitverkocht">Uitverkocht</div>
-                        <div class="product-afbeelding">&#127988;</div>
-                        <div class="product-info">
-                            <h4>Telstar Vlag (groot)</h4>
-                            <div class="product-prijs">&euro;19,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">&#127988;</div>
-                        <div class="product-info">
-                            <h4>Telstar Vlag (klein)</h4>
-                            <div class="product-prijs">&euro;19,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                    <article class="product-kaart">
-                        <div class="product-afbeelding">&#127914;</div>
-                        <div class="product-info">
-                            <h4>Telstar Sluban Bus</h4>
-                            <div class="product-prijs">&euro;34,95</div>
-                            <a href="#" class="knop-klein">Bekijk</a>
-                        </div>
-                    </article>
-                </div>
-
-                <h2 class="sectie-titel" id="tickets">Tickets</h2>
-                <div class="tickets-grid">
-                    <article class="ticket-kaart">
-                        <div class="ticket-links">
-                            <h4>Telstar - Jong AZ</h4>
-                            <p class="ticket-datum">Zaterdag 14 juni 2025 · 20:00</p>
-                            <p class="ticket-stadion">Boogerd Sport Stadion, IJmuiden</p>
-                        </div>
-                        <div class="ticket-rechts">
-                            <div class="ticket-prijs">Vanaf &euro;12,50</div>
-                            <a href="#" class="knop">Kopen</a>
-                        </div>
-                    </article>
-                    <article class="ticket-kaart">
-                        <div class="ticket-links">
-                            <h4>Telstar - FC Volendam</h4>
-                            <p class="ticket-datum">Vrijdag 21 juni 2025 · 20:00</p>
-                            <p class="ticket-stadion">Boogerd Sport Stadion, IJmuiden</p>
-                        </div>
-                        <div class="ticket-rechts">
-                            <div class="ticket-prijs">Vanaf &euro;12,50</div>
-                            <a href="#" class="knop">Kopen</a>
-                        </div>
-                    </article>
-                </div>
-            </section>
+                    </article>';
+                }
+                echo '</div>';
+            }
+            echo '</section>';
+            ?>
 
             <section class="shop-aanbieding-balk">
                 <p>&#10003; Seizoenskaarthouders 10% korting &nbsp;&nbsp; &#10003; Gratis verzending vanaf &euro;99,95</p>
