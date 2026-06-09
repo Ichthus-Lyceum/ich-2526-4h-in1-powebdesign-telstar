@@ -115,28 +115,28 @@
                             <label class="betaal-optie">
                                 <input type="radio" name="betaal" value="ideal" checked>
                                 <span class="betaal-label">
-                                    <span class="betaal-icoon">&#127988;</span>
+                                    <img src="img/ideallogo.webp" with="50" height="25" alt="Logo van ideal">
                                     iDEAL
                                 </span>
                             </label>
                             <label class="betaal-optie">
                                 <input type="radio" name="betaal" value="creditcard">
                                 <span class="betaal-label">
-                                    <span class="betaal-icoon">&#128179;</span>
-                                    Creditcard
+                                    <img src="img/mastercardlogo.webp" with="50" height="25" alt="Logo van Mastercard">
+                                    Mastercard
                                 </span>
                             </label>
                             <label class="betaal-optie">
                                 <input type="radio" name="betaal" value="paypal">
                                 <span class="betaal-label">
-                                    <span class="betaal-icoon">&#128184;</span>
+                                    <img src="img/paypallogo.webp" with="50" height="25" alt="Logo van Paypal">
                                     PayPal
                                 </span>
                             </label>
                             <label class="betaal-optie">
                                 <input type="radio" name="betaal" value="klarna">
                                 <span class="betaal-label">
-                                    <span class="betaal-icoon">&#128181;</span>
+                                    <img src="img/klaarnalogo.webp" with="50" height="25" alt="Logo van klaarna">
                                     Klarna
                                 </span>
                             </label>

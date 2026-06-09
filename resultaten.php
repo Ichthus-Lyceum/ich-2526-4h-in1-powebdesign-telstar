@@ -53,7 +53,7 @@ function getLogo($club) {
         <header>
             <button class="menu-knop" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
             <a href="index.php" class="logo-wrapper">
-                <img src="img/logo.png" alt="Telstar logo" class="logo-img">
+                <img src="img/telstarlogo.png" alt="Telstar logo" class="logo-img">
                 <div class="clubnaam">Telstar<small>IJmuiden &middot; 1963</small></div>
             </a>
             <div class="zoekbalk">
