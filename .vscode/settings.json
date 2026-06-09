@@ -11,7 +11,7 @@
     "merge-conflict.autoNavigateNextConflict.enabled": true, // auto navigate to next merge conflict after resolving one, must be false to prevent ignoring merge ours strategy
 
     // copilot settings
-    "chat.disableAIFeatures": true, // disable all AI features, user can enable it again in the settings. 
+    "chat.disableAIFeatures": false, // disable all AI features, user can enable it again in the settings. 
     "github.copilot.enable": { // disable copilot code suggestions in editor (when copilot is enabled), we rather stick to autocomplete and use copilot chat for code snippets
         "*": false
     },
@@ -33,6 +33,10 @@
         "__pycache__/": true,
         "adminer-plugins/": true,
         "adminer-plugins.php": true,
-        "adminer.php": true
+        "adminer.php": true,
+        "bibliotheek.db":true,
+        "eredivisie.sqlite":true,
+        "fastfood.s3db":true,
+        "top2000.sqlite":true
     },
 }
