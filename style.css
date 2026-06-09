@@ -1,3 +1,19 @@
+/* ===========================
+   TELSTAR WEBSITE - STYLE.CSS
+   =========================== */
+
+:root {
+    --wit: #FFFFFF;
+    --zwart: #111111;
+    --blauw: #002B7F;
+    --lichtblauw: #1A4FBB;
+    --grijs: #F2F4F8;
+    --donkergrijs: #444444;
+    --rand: #D0D5E8;
+    --accent: #E8B400;
+    --tekst: #1E1E1E;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,118 +21,2335 @@
 }
 
 body {
-    display: grid;
-    grid-template-columns: 10% 1fr;
-    grid-template-rows: 15% 1fr;
-    grid-template-areas:
-        "header header"
-        "sidebar content";
-    height: 100vh;
     font-family: Arial, sans-serif;
+    color: var(--tekst);
+    background-color: var(--grijs);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
 }
 
-/* HEADER */
-.header {
-    grid-area: header;
-    background: #4CAF50;
-    position: relative;
+/* ===== HEADER ===== */
+header {
+    background-color: var(--blauw);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0 24px;
+    height: 70px;
+    gap: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    position: sticky;
+    top: 0;
+    z-index: 200;
 }
 
-/* LOGO */
-.logo img {
-    width: 80px;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-}
-
-/* SEARCH */
-.search {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.search input {
-    padding: 10px;
-    width: 250px;
+.menu-knop {
+    background: none;
     border: none;
-    border-radius: 5px;
+    color: var(--wit);
+    font-size: 1.6rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: background-color 0.2s;
 }
 
-/* PROFILE */
-.profile {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 24px;
-    background: white;
+.menu-knop:hover {
+    background-color: var(--lichtblauw);
+}
+
+.sidenav {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--blauw);
+    z-index: 300;
+    transition: left 0.3s ease;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+}
+
+.sidenav.open {
+    left: 0;
+}
+
+.sidenav-sluit {
+    background: none;
+    border: none;
+    color: var(--wit);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 16px 20px;
+    text-align: right;
+    display: block;
+    line-height: 1;
+}
+
+.sidenav-sluit:hover {
+    color: var(--accent);
+}
+
+.sidenav-logo {
+    padding: 0 24px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidenav-logo img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+}
+
+.sidenav-clubnaam {
+    color: var(--wit);
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.sidenav-clubnaam span {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.sidenav nav ul {
+    list-style: none;
+    padding: 16px 0;
+    display: block;
+}
+
+.sidenav nav ul li a {
+    display: block;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 28px;
+    border-left: 4px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.sidenav nav ul li a:hover {
+    background-color: var(--lichtblauw);
+    border-left-color: var(--accent);
+    color: var(--wit);
+}
+
+.sidenav nav ul li a.actief {
+    background-color: rgba(255,255,255,0.1);
+    border-left-color: var(--accent);
+    color: var(--accent);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 250;
+}
+
+.overlay.open {
+    display: block;
+}
+
+.logo-wrapper {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-cirkel {
+    width: 48px;
+    height: 48px;
+    background-color: var(--wit);
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border: 3px solid var(--accent);
+}
+
+.logo-cirkel svg {
+    width: 32px;
+    height: 32px;
+}
+
+.clubnaam {
+    color: var(--wit);
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.clubnaam small {
+    display: block;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* zoekbalk in header */
+.zoekbalk {
+    display: grid;
+    justify-content: center;
+}
+
+.zoekbalk form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    width: 320px;
+}
+
+.zoekbalk input {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.zoekbalk button {
+    background-color: var(--accent);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--zwart);
+}
+
+/* navigatie */
+nav ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 2px;
+}
+
+nav ul li a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 4px;
+    display: block;
+    transition: background-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+nav ul li a:hover {
+    background-color: var(--lichtblauw);
+    color: var(--wit);
+}
+
+nav ul li a.actief {
+    background-color: var(--accent);
+    color: var(--zwart);
+}
+
+/* ===== MAIN ===== */
+main {
+    padding: 0 0 48px 0;
+}
+
+/* ===== HERO HOME ===== */
+.hero {
+    background: linear-gradient(135deg, var(--blauw) 55%, var(--lichtblauw));
+    color: var(--wit);
+    padding: 48px 40px;
+    border-bottom: 4px solid var(--accent);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+.hero-welkom h1 {
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero-welkom p {
+    color: var(--accent);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* score widget */
+.score-widget {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.score-widget h3 {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.score-groot {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 6px;
+}
+
+.score-teams {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+/* stand widget */
+.stand-widget {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.stand-widget h3 {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+.stand-widget table {
+    width: 100%;
+    font-size: 0.78rem;
+    color: var(--wit);
+}
+
+.stand-widget table th {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.65rem;
+    padding: 2px 4px;
+    text-align: left;
+}
+
+.stand-widget table td {
+    padding: 4px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.stand-widget .telstar-rij td {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+/* programma balk */
+.programma-balk {
+    background-color: var(--blauw);
+    border-bottom: 3px solid var(--accent);
+    padding: 14px 40px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+.programma-label {
+    color: var(--accent);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.programma-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.programma-item {
+    background-color: rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 8px 12px;
+    color: var(--wit);
+    font-size: 0.78rem;
+    display: grid;
+    gap: 2px;
+}
+
+.programma-item .datum {
+    color: var(--accent);
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+}
+
+/* ===== PAGINA HEADER ===== */
+.pagina-header {
+    background: linear-gradient(135deg, var(--blauw) 55%, var(--lichtblauw));
+    color: var(--wit);
+    padding: 44px 40px 36px;
+    border-bottom: 4px solid var(--accent);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+}
+
+.pagina-header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.pagina-header p {
+    color: var(--accent);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+}
+
+/* ===== CONTENT GRID (wrapper) ===== */
+.pagina-inhoud {
+    padding: 36px 40px;
+    display: grid;
+    gap: 32px;
+}
+
+.sectie-titel {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+/* ===== WEBSHOP ===== */
+.shop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 36px 40px;
+}
+
+.shop-kaart {
+    background-color: var(--wit);
+    border-radius: 8px;
+    border: 1px solid var(--rand);
+    border-top: 4px solid var(--blauw);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.shop-kaart:hover {
+    box-shadow: 0 6px 20px rgba(0,43,127,0.15);
+    transform: translateY(-3px);
+}
+
+.shop-kaart-banner {
+    background: linear-gradient(135deg, var(--blauw), var(--lichtblauw));
+    height: 120px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color: var(--wit);
+    font-size: 2.5rem;
+}
+
+.shop-kaart-body {
+    padding: 20px;
+}
+
+.shop-kaart-body h3 {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--blauw);
+    margin-bottom: 8px;
+}
+
+.shop-kaart-body p {
+    font-size: 0.85rem;
+    color: var(--donkergrijs);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.knop {
+    background-color: var(--blauw);
+    color: var(--wit);
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.knop:hover {
+    background-color: var(--lichtblauw);
+}
+
+/* items grid (sale) */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 36px 40px;
+}
+
+.item-kaart {
+    background-color: var(--wit);
+    border-radius: 10px;
+    border: 1px solid var(--rand);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+}
+
+.item-kaart:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.12);
+}
+
+.item-afbeelding {
+    .product-afbeelding {
+    background: #f8f9fc;
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+    border-bottom: 1px solid var(--rand);
+    overflow: hidden;
+}
+}
+
+.item-info {
+    padding: 14px;
+}
+
+.item-info h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--tekst);
+    margin-bottom: 4px;
+}
+
+.item-prijs {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+.item-prijs .oud {
+    font-size: 0.75rem;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 400;
+    margin-left: 6px;
+}
+
+/* ===== SELECTIE / MANNEN ===== */
+
+
+.speler-rij {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 6px;
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    transition: box-shadow 0.15s;
+}
+
+.speler-rij:hover {
+    box-shadow: 0 3px 10px rgba(0,43,127,0.1);
+}
+
+.rugnummer {
+    background-color: var(--blauw);
+    color: var(--wit);
+    font-size: 1.1rem;
+    font-weight: 900;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* SIDEBAR */
-.sidebar {
-    grid-area: sidebar;
-    background: #333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* CONTENT */
-.content {
-    grid-area: content;
-    background: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 30px;
-}
-
-/* TITLE */
-.title {
-    margin-bottom: 30px;
-}
-
-/* CARDS CONTAINER */
-.cards {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 grote vakken */
-    gap: 40px;
-    width: 95%; /* bijna hele pagina */
+    align-items: center;
+    justify-items: center;
 }
 
-/* BIG BOXES */
-.card {
-    border: 2px solid black;
-    padding: 20px;
-    height: 500px; /* groot */
-    background: #fff;
-    display: flex;
-    flex-direction: column;
+.speler-naam {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--tekst);
 }
 
-/* TITLE IN CARD */
-.card h2 {
+.speler-positie {
+    font-size: 0.7rem;
+    color: var(--lichtblauw);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    background-color: var(--grijs);
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+/* ===== DE CLUB ===== */
+.club-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 36px 40px;
+}
+
+.info-blok {
+    background-color: var(--wit);
+    border-radius: 8px;
+    border: 1px solid var(--rand);
+    border-top: 4px solid var(--blauw);
+    padding: 24px;
+}
+
+.info-blok h2 {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.info-blok p,
+.info-blok ul {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--donkergrijs);
+}
+
+.info-blok ul {
+    list-style: none;
+    display: grid;
+    gap: 6px;
+}
+
+/* ===== RESULTATEN ===== */
+.resultaten-inhoud {
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+/* ===== TABELLEN ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background-color: var(--wit);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--rand);
+}
+
+table thead {
+    background-color: var(--blauw);
+    color: var(--wit);
+}
+
+table thead th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+table tbody tr {
+    border-bottom: 1px solid var(--rand);
+    transition: background-color 0.15s;
+}
+
+table tbody tr:hover {
+    background-color: var(--grijs);
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #F8F9FC;
+}
+
+table tbody td {
+    padding: 12px 16px;
+}
+
+.telstar-rij td {
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+.score-cel {
+    font-weight: 900;
+    color: var(--blauw);
+    font-size: 1rem;
     text-align: center;
-    margin-bottom: 15px;
-    font-size: 24px;
 }
 
-/* ITEMS IN CARD */
-.card p {
-    border-bottom: 1px solid #ccc;
+/* stand mini tabel */
+.stand-blok {
+    background-color: var(--wit);
+    border-radius: 8px;
+    border: 1px solid var(--rand);
+    border-top: 4px solid var(--accent);
+    overflow: hidden;
+}
+
+.stand-blok h3 {
+    padding: 14px 16px;
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--blauw);
+    border-bottom: 1px solid var(--rand);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: var(--zwart);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 20px;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+}
+
+/* ===== LOGO AFBEELDING ===== */
+.logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.4));
+}
+
+/* ===== SHOP HERO ===== */
+.shop-hero {
+    background: linear-gradient(135deg, var(--blauw) 40%, #8B0000 100%);
+    min-height: 260px;
+    display: grid;
+    align-items: center;
+    padding: 48px 48px;
+    border-bottom: 4px solid var(--accent);
+}
+
+.shop-hero-tekst {
+    display: grid;
+    gap: 14px;
+    max-width: 600px;
+}
+
+.shop-hero-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.shop-hero h1 {
+    color: var(--wit);
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 6px;
+    line-height: 1;
+}
+
+.shop-hero-aanbieding {
+    background-color: rgba(232,180,0,0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 10px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* ===== SHOP CATEGORIEEN ===== */
+.shop-categorieen {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 3px solid var(--accent);
+}
+
+.categorie-kaart {
+    background-color: var(--blauw);
+    color: var(--wit);
+    padding: 28px 20px;
+    text-align: center;
+    text-decoration: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s;
+    display: grid;
+    gap: 6px;
+}
+
+.categorie-kaart:last-child {
+    border-right: none;
+}
+
+.categorie-kaart:hover {
+    background-color: var(--lichtblauw);
+}
+
+.categorie-icoon {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+.categorie-kaart h3 {
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.categorie-kaart p {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* ===== PRODUCTEN ===== */
+.producten-sectie {
+    padding: 40px 48px;
+    display: grid;
+    gap: 12px;
+}
+
+.producten-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.product-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.product-kaart:hover {
+    box-shadow: 0 6px 20px rgba(0,43,127,0.15);
+    transform: translateY(-3px);
+}
+
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: var(--accent);
+    color: var(--zwart);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    z-index: 1;
+}
+
+.product-badge.uitverkocht {
+    background-color: #999;
+    color: var(--wit);
+}
+
+.product-afbeelding {
+    background: #f8f9fc;
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
+    border-bottom: 1px solid var(--rand);
+    overflow: hidden;
+}
+
+.product-info {
+    padding: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.product-info h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--tekst);
+    line-height: 1.3;
+}
+
+.product-prijs {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+.knop-klein {
+    background-color: var(--blauw);
+    color: var(--wit);
+    padding: 7px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+
+.knop-klein:hover {
+    background-color: var(--lichtblauw);
+}
+
+/* ===== TICKETS ===== */
+.tickets-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.ticket-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-left: 5px solid var(--blauw);
+    border-radius: 6px;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 20px;
+    transition: box-shadow 0.2s;
+}
+
+.ticket-kaart:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.12);
+}
+
+.ticket-links h4 {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    margin-bottom: 4px;
+}
+
+.ticket-datum {
+    font-size: 0.82rem;
+    color: var(--donkergrijs);
+    margin-bottom: 2px;
+}
+
+.ticket-stadion {
+    font-size: 0.78rem;
+    color: #888;
+}
+
+.ticket-rechts {
+    text-align: right;
+    display: grid;
+    gap: 8px;
+}
+
+.ticket-prijs {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+/* ===== AANBIEDING BALK ===== */
+.shop-aanbieding-balk {
+    background-color: var(--blauw);
+    color: var(--wit);
+    text-align: center;
+    padding: 14px;
+    font-size: 0.82rem;
+    letter-spacing: 1px;
+    border-top: 3px solid var(--accent);
+}
+
+/* ===== PRODUCT AFBEELDING MET ECHTE IMG ===== */
+.product-afbeelding img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    padding: 12px;
+    background: #f8f9fc;
+}
+
+/* ===== RESULTATEN ===== */
+.resultaten-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: var(--blauw);
+    border-bottom: 3px solid var(--accent);
+}
+
+.res-stat {
+    padding: 28px 20px;
+    text-align: center;
+    display: grid;
+    gap: 6px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.res-stat:last-child {
+    border-right: none;
+}
+
+.res-stat-nummer {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.res-stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+}
+
+.res-stat.gewonnen .res-stat-nummer { color: #4CAF50; }
+.res-stat.gelijk .res-stat-nummer { color: var(--accent); }
+.res-stat.verloren .res-stat-nummer { color: #EF5350; }
+.res-stat.doelpunten .res-stat-nummer { color: var(--wit); }
+
+.resultaten-lijst {
+    padding: 36px 48px;
+    display: grid;
+    gap: 10px;
+}
+
+.wedstrijd-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 16px 24px;
+    display: grid;
+    grid-template-columns: 130px 1fr 48px;
+    align-items: center;
+    gap: 20px;
+    border-left: 5px solid var(--rand);
+    transition: box-shadow 0.15s;
+}
+
+.wedstrijd-kaart:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.1);
+}
+
+.wedstrijd-kaart.winst { border-left-color: #4CAF50; }
+.wedstrijd-kaart.gelijk { border-left-color: var(--accent); }
+.wedstrijd-kaart.verlies { border-left-color: #EF5350; }
+
+.wedstrijd-datum {
+    display: grid;
+    gap: 2px;
+}
+
+.wedstrijd-datum .dag {
+    font-size: 0.72rem;
+    color: var(--lichtblauw);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.wedstrijd-datum .datum {
+    font-size: 0.88rem;
+    color: var(--donkergrijs);
+}
+
+.wedstrijd-teams {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+}
+
+.team {
+    font-size: 0.95rem;
+    color: var(--tekst);
+}
+
+.team.thuis {
+    text-align: right;
+}
+
+.team.uit {
+    text-align: left;
+}
+
+.team.is-telstar {
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+.wedstrijd-score {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--blauw);
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.score-getal {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--wit);
+    min-width: 20px;
+    text-align: center;
+}
+
+.score-streep {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+}
+
+.wedstrijd-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--wit);
+    justify-self: center;
+}
+
+.wedstrijd-badge.winst { background-color: #4CAF50; }
+.wedstrijd-badge.gelijk { background-color: var(--accent); color: var(--zwart); }
+.wedstrijd-badge.verlies { background-color: #EF5350; }
+
+/* ===== SELECTIE SECTIE ===== */
+
+
+.positie-titel {
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--wit);
+    background-color: var(--blauw);
+    padding: 8px 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-left: 4px solid var(--accent);
+    margin-top: 16px;
+    margin-bottom: 8px;
+}
+
+/* ===== CLUB LOGOS IN WEDSTRIJDKAART ===== */
+.wedstrijd-teams .team {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+}
+
+.wedstrijd-teams .team.uit {
+    grid-template-columns: 1fr auto;
+    text-align: right;
+}
+
+.wedstrijd-teams .team img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+/* ===== SPELER KAART MET FOTO/AVATAR ===== */
+.selectie-sectie {
+    padding: 0 48px;
+    margin-bottom: 8px;
+}
+
+.selectie-sectie:first-of-type {
+    padding-top: 36px;
+}
+
+.selectie-sectie:last-of-type {
+    padding-bottom: 48px;
+}
+
+.selectie-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.speler-kaart-foto {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 180px 36px 1fr;
+    align-items: center;
+    gap: 16px;
+    transition: box-shadow 0.15s, transform 0.15s;
+    border-left: 4px solid var(--blauw);
+}
+
+.speler-kaart-foto:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.12);
+    transform: translateY(-2px);
+}
+
+.speler-foto {
+    width: 180px;
+    height: 220px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: center 15%;
+    border: 3px solid var(--blauw);
+    flex-shrink: 0;
+}
+
+.speler-rugnr {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-align: center;
+    opacity: 0.6;
+}
+
+.speler-naam-groot {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--tekst);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.captain-badge {
+    background-color: var(--accent);
+    color: var(--zwart);
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 1px 5px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+}
+
+.speler-meta {
+    font-size: 0.75rem;
+    color: var(--donkergrijs);
+    margin-top: 3px;
+}
+
+.speler-pos {
+    color: var(--lichtblauw);
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== HEADER RECHTS (zoekbalk + winkelwagen) ===== */
+.header-rechts {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ===== WINKELWAGEN KNOP ===== */
+.winkelwagen-knop {
+    background-color: var(--accent);
+    border: none;
+    color: var(--zwart);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 6px;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 6px;
+    font-weight: 900;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.winkelwagen-knop:hover {
+    background-color: #d4a200;
+}
+
+.ww-aantal {
+    background-color: var(--blauw);
+    color: var(--wit);
+    font-size: 0.7rem;
+    font-weight: 900;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+/* ===== WINKELWAGEN PANEL ===== */
+.ww-panel {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 400px;
+    height: 100vh;
+    background-color: var(--wit);
+    z-index: 300;
+    transition: right 0.3s ease;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+}
+
+.ww-panel.open {
+    right: 0;
+}
+
+.ww-header {
+    background-color: var(--blauw);
+    color: var(--wit);
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+}
+
+.ww-header h3 {
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.ww-header button {
+    background: none;
+    border: none;
+    color: var(--wit);
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.ww-header button:hover {
+    color: var(--accent);
+}
+
+.ww-items {
+    overflow-y: auto;
+    padding: 20px;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+}
+
+.ww-leeg {
+    color: var(--donkergrijs);
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 40px 0;
+}
+
+.ww-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background-color: var(--grijs);
+    border-radius: 8px;
+    border: 1px solid var(--rand);
+}
+
+.ww-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    background-color: var(--wit);
+}
+
+.ww-item-info {
+    display: grid;
+    gap: 4px;
+}
+
+.ww-item-naam {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.ww-item-prijs {
+    font-size: 0.8rem;
+    color: var(--blauw);
+    font-weight: 600;
+}
+
+.ww-verwijder {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.ww-verwijder:hover {
+    color: #EF5350;
+}
+
+.ww-footer {
+    padding: 20px 24px;
+    border-top: 2px solid var(--rand);
+    display: grid;
+    gap: 12px;
+}
+
+.ww-totaal {
+    font-size: 1rem;
+    color: var(--tekst);
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.ww-totaal strong {
+    color: var(--blauw);
+    font-size: 1.2rem;
+}
+
+/* knop-klein als button */
+button.knop-klein {
+    background-color: var(--blauw);
+    color: var(--wit);
+    border: none;
+    padding: 9px 14px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s;
+}
+
+button.knop-klein:hover {
+    background-color: var(--lichtblauw);
+}
+
+button.knop-klein:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button.knop {
+    background-color: var(--blauw);
+    color: var(--wit);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button.knop:hover {
+    background-color: var(--lichtblauw);
+}
+
+/* ===== ZOEKPAGINA ===== */
+.zoek-sectie {
+    padding: 36px 48px;
+    display: grid;
+    gap: 32px;
+    max-width: 1100px;
+}
+
+.zoek-groot {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,43,127,0.12);
+}
+
+.zoek-groot input {
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    border: 2px solid var(--blauw);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    width: 100%;
+}
+
+.zoek-groot button {
+    background-color: var(--blauw);
+    color: var(--wit);
+    border: none;
+    padding: 16px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 0 8px 8px 0;
+    letter-spacing: 1px;
+    transition: background-color 0.2s;
+}
+
+.zoek-groot button:hover {
+    background-color: var(--lichtblauw);
+}
+
+.zoek-hint {
+    color: var(--donkergrijs);
+    font-size: 0.9rem;
+    padding: 20px;
+    background-color: var(--grijs);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+}
+
+.zoek-geen {
+    padding: 40px;
+    text-align: center;
+    background-color: var(--grijs);
+    border-radius: 8px;
+    color: var(--donkergrijs);
+}
+
+.zoek-groep {
+    display: grid;
+    gap: 16px;
+}
+
+/* spelers */
+.zoek-spelers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.zoek-speler-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-left: 4px solid var(--blauw);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: box-shadow 0.15s;
+}
+
+.zoek-speler-kaart:hover {
+    box-shadow: 0 3px 10px rgba(0,43,127,0.12);
+}
+
+.zoek-rugnr {
+    background-color: var(--blauw);
+    color: var(--wit);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    font-weight: 900;
+    font-size: 0.85rem;
+}
+
+/* producten */
+.zoek-producten-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.zoek-product-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.zoek-product-kaart:hover {
+    box-shadow: 0 4px 14px rgba(0,43,127,0.12);
+    transform: translateY(-2px);
+}
+
+.zoek-product-kaart img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.zoek-product-info {
+    padding: 10px 12px;
+}
+
+.zoek-prijs {
+    font-weight: 900;
+    color: var(--blauw);
+    font-size: 1rem;
+    margin: 4px 0;
+}
+
+/* wedstrijden */
+.zoek-wedstrijden {
+    display: grid;
+    gap: 8px;
+}
+
+.zoek-wedstrijd-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 6px;
+    padding: 12px 20px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--tekst);
+    transition: background-color 0.15s;
+}
+
+.zoek-wedstrijd-kaart:hover {
+    background-color: var(--grijs);
+}
+
+/* clubs */
+.zoek-clubs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.zoek-club-kaart {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 6px;
+    padding: 12px 16px;
+}
+
+.zoek-naam {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.zoek-sub {
+    font-size: 0.75rem;
+    color: var(--lichtblauw);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+
+.zoek-datum {
+    font-size: 0.8rem;
+    color: var(--donkergrijs);
+}
+
+.zoek-teams {
+    font-size: 0.9rem;
+    color: var(--tekst);
+}
+
+/* ===== HOME GRID ===== */
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    padding: 36px 48px;
+    align-items: start;
+}
+
+.home-blok {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.home-zijbalk {
+    display: grid;
+    gap: 0;
+}
+
+/* stand tabel */
+.stand-tabel {
+    width: 100%;
+    font-size: 0.82rem;
+    border: none;
+}
+
+.stand-tabel thead th {
+    font-size: 0.7rem;
+    padding: 8px 10px;
+}
+
+.stand-tabel tbody td {
+    padding: 8px 10px;
+}
+
+.stand-club {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.stand-club img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.telstar-rij td {
+    background-color: rgba(0,43,127,0.06);
+    font-weight: 900;
+    color: var(--blauw);
+}
+
+/* score widget uitgebreid */
+.score-widget-teams {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0 8px;
+}
+
+.score-widget-club {
+    display: grid;
+    gap: 6px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+}
+
+.score-widget-club img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+.score-datum {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+/* uitgelichte spelers */
+.home-spelers {
+    display: grid;
+    gap: 10px;
+}
+
+.home-speler {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    background-color: var(--grijs);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: box-shadow 0.15s;
+}
+
+.home-speler:hover {
+    box-shadow: 0 3px 10px rgba(0,43,127,0.12);
+}
+
+.home-speler img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    object-position: center 15%;
+}
+
+.home-speler-info {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding-right: 12px;
+}
+
+.home-speler-nr {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--blauw);
+    opacity: 0.4;
+}
+
+.home-speler-naam {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.home-speler-pos {
+    font-size: 0.7rem;
+    color: var(--lichtblauw);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* shop preview */
+.home-shop-preview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.home-shop-item {
+    text-decoration: none;
+    text-align: center;
+    display: grid;
+    gap: 4px;
+    font-size: 0.72rem;
+    color: var(--tekst);
+    transition: opacity 0.15s;
+}
+
+.home-shop-item:hover {
+    opacity: 0.8;
+}
+
+.home-shop-item img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--rand);
+}
+
+.home-shop-prijs {
+    font-weight: 900;
+    color: var(--blauw);
+    font-size: 0.8rem;
+}
+/* ===== HERO VERBETERINGEN ===== */
+.hero-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+    display: block;
+}
+
+.hero-knoppen {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: start;
+}
+
+.knop-outline {
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.6);
+    color: var(--wit);
+}
+
+.knop-outline:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: var(--wit);
+}
+
+.knop-goud {
+    background-color: var(--accent);
+    color: var(--zwart);
+}
+
+.knop-goud:hover {
+    background-color: #d4a200;
+}
+
+.hero-info-widget {
+    background-color: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.hero-info-widget h3 {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+}
+
+.hero-feiten {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+}
+
+.hero-feiten li {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 0.82rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 6px;
+}
+
+.feit-label {
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.7rem;
+}
+
+.feit-waarde {
+    color: var(--wit);
+    font-weight: 700;
+    text-align: right;
+}
+
+/* stats balk */
+.stats-balk {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background-color: var(--zwart);
+    border-bottom: 3px solid var(--accent);
+}
+
+.stat {
+    padding: 20px;
+    text-align: center;
+    display: grid;
+    gap: 4px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-nummer {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--wit);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+}
+
+
+/* ===== AFREKENEN PAGINA ===== */
+/* ===== CHECKOUT PAGINA ===== */
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 28px;
+    padding: 36px 48px;
+    align-items: start;
+}
+
+.checkout-formulier {
+    display: grid;
+    gap: 20px;
+}
+
+.checkout-blok {
+    background-color: var(--wit);
+    border: 1px solid var(--rand);
+    border-radius: 8px;
+    padding: 24px;
+    border-top: 4px solid var(--blauw);
+}
+
+.checkout-blok h2 {
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: var(--blauw);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--rand);
+}
+
+.form-veld {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-veld:last-child { margin-bottom: 0; }
+
+.form-veld label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--donkergrijs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-veld input,
+.form-veld select {
+    padding: 10px 14px;
+    border: 1.5px solid var(--rand);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--tekst);
+    background: var(--wit);
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-veld input:focus,
+.form-veld select:focus {
+    border-color: var(--blauw);
+}
+
+.form-rij-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+/* betaalopties */
+.betaal-opties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.betaal-optie {
+    cursor: pointer;
+}
+
+.betaal-optie input[type="radio"] {
+    display: none;
+}
+
+.betaal-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 2px solid var(--rand);
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--tekst);
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.betaal-optie input[type="radio"]:checked + .betaal-label {
+    border-color: var(--blauw);
+    background-color: rgba(0,43,127,0.05);
+    color: var(--blauw);
+}
+
+.betaal-icoon {
+    font-size: 1.3rem;
+}
+
+/* overzicht */
+.checkout-overzicht {
+    display: grid;
+    gap: 20px;
+    position: sticky;
+    top: 90px;
+}
+
+.co-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: 12px;
     padding: 10px 0;
-    margin: 0;
-    font-size: 18px;
+    border-bottom: 1px solid var(--rand);
+}
+
+.co-item:last-child { border-bottom: none; }
+
+.co-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid var(--rand);
+    background: #f8f9fc;
+    padding: 4px;
+}
+
+.co-item-info {
+    display: grid;
+    gap: 3px;
+}
+
+.co-item-naam {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--tekst);
+}
+
+.co-item-meta {
+    font-size: 0.75rem;
+    color: var(--donkergrijs);
+}
+
+.co-item-totaal {
+    font-size: 0.9rem;
+    font-weight: 900;
+    color: var(--blauw);
+    white-space: nowrap;
+}
+
+/* korting */
+.korting-blok {
+    border-top-color: var(--accent);
+}
+
+.korting-invoer {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.korting-invoer input {
+    padding: 10px 14px;
+    border: 1.5px solid var(--rand);
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.korting-invoer input:focus {
+    border-color: var(--accent);
+}
+
+.korting-melding {
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.korting-melding.geldig {
+    background-color: rgba(76,175,80,0.1);
+    color: #2e7d32;
+    border: 1px solid #4CAF50;
+}
+
+.korting-melding.ongeldig {
+    background-color: rgba(239,83,80,0.1);
+    color: #c62828;
+    border: 1px solid #EF5350;
+}
+
+/* totaal blok */
+.checkout-totaal-blok {
+    border-top-color: var(--accent);
+}
+
+.co-totaal-rij {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rand);
+    color: var(--donkergrijs);
+}
+
+.co-totaal-rij.korting-rij {
+    color: #2e7d32;
+}
+
+.korting-bedrag {
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.co-totaal-rij.totaal-finaal {
+    border-bottom: none;
+    padding-top: 12px;
+    font-size: 1.05rem;
+    color: var(--tekst);
+}
+
+.checkout-knop {
+    width: 100%;
+    padding: 14px;
+    font-size: 0.95rem;
+    margin-top: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: var(--blauw);
+    color: var(--wit);
+    border: none;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+.checkout-knop:hover { background-color: var(--lichtblauw); }
+
+.checkout-terug {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--donkergrijs);
+    text-decoration: none;
+}
+
+.checkout-terug:hover { color: var(--blauw); text-decoration: underline; }
+
+/* bevestiging popup */
+.bevestiging-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bevestiging-popup {
+    background: var(--wit);
+    border-radius: 12px;
+    padding: 48px 40px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.bevestiging-icoon {
+    font-size: 3.5rem;
+    margin-bottom: 16px;
+}
+
+.bevestiging-popup h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--blauw);
+    margin-bottom: 12px;
+}
+
+.bevestiging-popup p {
+    font-size: 0.9rem;
+    color: var(--donkergrijs);
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+.bevestiging-sub {
+    font-size: 0.85rem;
+    color: var(--blauw);
+}
+/* ===== HULPKLASSEN (vervangt inline styles) ===== */
+.verborgen {
+    display: none;
+}
+
+.knop-blok {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.knop-midden {
+    text-align: center;
+    display: block;
+}
+
+.knop-popup {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.ww-footer-verborgen {
+    display: none;
 }
